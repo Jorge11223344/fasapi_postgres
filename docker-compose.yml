@@ -12,6 +12,8 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - mired
    
 
   web:
@@ -24,6 +26,8 @@ services:
       - DATABASE_URL=${DATABASE_URL}
     env_file:
       - .env
+    networks:
+      - mired
 
   pgadmin:
     image: dpage/pgadmin4
