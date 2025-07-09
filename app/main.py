@@ -4,7 +4,7 @@ from .database import SessionLocal, Base, engine
 from .crud import get_users
 from .models import User
 
-
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -16,7 +16,7 @@ def get_db():
         db.close()
 
 @app.get("/users")
-def read_root():
-    return {"Hello": "World"}
+def read_users(db: Session = Depends(get_db)):
+    return get_users(db)
 
 
